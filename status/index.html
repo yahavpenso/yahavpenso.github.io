@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#15161C">
+<meta name="referrer" content="no-referrer">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pitzki Status">
+<title>Pitzki Status</title>
+<style>
+  :root { --bg:#15161C; --card:#20222B; --line:#2E3140; --txt:#fff; --mut:#A0A4B8; --dim:#6B6F82; --acc:#7C5CFF; --ok:#3DD68C; --bad:#FF6B6B; --warn:#FFC857; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--txt); font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif; }
+  body { padding:16px 16px calc(24px + env(safe-area-inset-bottom)); max-width:520px; margin:0 auto; }
+  header { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  header img { width:52px; height:52px; object-fit:contain; }
+  header h1 { margin:0; font-size:22px; }
+  header .sub { color:var(--mut); font-size:13px; }
+  .hero { background:var(--card); border-radius:16px; padding:22px 16px; text-align:center; }
+  .orb { width:92px; height:92px; border-radius:50%; margin:0 auto 12px; display:grid; place-items:center; font-size:40px; background:var(--line); transition:background .4s, box-shadow .4s; }
+  .orb.on { background:#1d3b2e; box-shadow:0 0 0 6px #3dd68c22, 0 0 40px #3dd68c55; }
+  .orb.off { background:#3b1d22; box-shadow:0 0 0 6px #ff6b6b22; }
+  .orb.sleep { background:#38331d; box-shadow:0 0 0 6px #ffc85722; }
+  .orb.wait { animation:pulse 1.2s infinite; }
+  @keyframes pulse { 50% { transform:scale(.93); opacity:.7; } }
+  .big { font-size:24px; font-weight:700; }
+  .small { color:var(--mut); font-size:13px; margin-top:4px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+  .card { background:var(--card); border-radius:14px; padding:14px; min-width:0; }
+  .card.wide { grid-column:1 / -1; }
+  .lab { color:var(--mut); font-size:12px; margin-bottom:4px; }
+  .val { font-size:20px; font-weight:700; overflow-wrap:anywhere; }
+  .val small { font-size:12px; color:var(--mut); font-weight:400; }
+  .bar { height:7px; background:var(--line); border-radius:4px; margin-top:8px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--acc); border-radius:4px; transition:width .5s; }
+  .bar i.hot { background:var(--bad); }
+  .row { display:flex; justify-content:space-between; gap:8px; font-size:14px; padding:5px 0; border-bottom:1px solid var(--line); }
+  .row:last-child { border-bottom:0; }
+  .row span:last-child { color:var(--mut); direction:ltr; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { background:#2a2550; color:#cfc4ff; border-radius:20px; padding:4px 10px; font-size:13px; direction:ltr; }
+  .ltr { direction:ltr; unicode-bidi:isolate; }
+  button { font:inherit; color:#fff; background:var(--acc); border:0; border-radius:10px; padding:12px 18px; font-weight:600; width:100%; margin-top:14px; cursor:pointer; }
+  button:disabled { opacity:.5; }
+  .hidden { display:none !important; }
+  .foot { color:var(--dim); font-size:11px; text-align:center; margin-top:16px; line-height:1.6; }
+  .ev { display:flex; justify-content:space-between; font-size:14px; padding:4px 0; }
+  .ev span:last-child { color:var(--mut); }
+</style>
+</head>
+<body>
+<header>
+  <img src="pitzki.png" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{textContent:'🐹',style:'font-size:40px'}))">
+  <div><h1>Pitzki Status</h1><div class="sub" id="pcName">My PC</div></div>
+</header>
+
+<section id="setup" class="hero hidden">
+  <div class="orb">🔗</div>
+  <div class="big">Not connected yet</div>
+  <div class="small">Open Pitzki Status on your PC and scan the QR code with your phone.<br>Then add this page to your home screen.</div>
+</section>
+
+<main id="app" class="hidden">
+  <section class="hero">
+    <div class="orb wait" id="orb">⏳</div>
+    <div class="big" id="state">Checking…</div>
+    <div class="small" id="stateSub">Asking the PC</div>
+    <button id="refresh">🔄 Check now</button>
+  </section>
+
+  <div id="details" class="grid hidden">
+    <div class="card"><div class="lab">CPU</div><div class="val" id="cpu">–</div><div class="bar"><i id="cpuBar"></i></div></div>
+    <div class="card"><div class="lab">Memory</div><div class="val" id="ram">–</div><div class="bar"><i id="ramBar"></i></div></div>
+    <div class="card"><div class="lab">On for</div><div class="val" id="up">–</div></div>
+    <div class="card"><div class="lab">Network</div><div class="val" id="net" style="font-size:15px">–</div></div>
+    <div class="card wide"><div class="lab">At the PC</div><div class="val" id="who" style="font-size:16px">–</div>
+      <div class="small" id="fg"></div></div>
+    <div class="card wide" id="pzCard"><div class="lab">Pitzki apps running</div><div class="chips" id="pz"></div></div>
+    <div class="card wide"><div class="lab">Disks (free)</div><div id="disks"></div></div>
+    <div class="card wide"><div class="lab">Top memory users</div><div id="top"></div></div>
+  </div>
+
+  <div class="card wide" id="histCard" style="margin-top:10px"><div class="lab">Today (last 12 hours)</div><div id="hist"></div></div>
+</main>
+
+<div class="foot">🔒 Data is encrypted on the PC and only decrypted here on your phone. View only: this page cannot control the PC.<br>
+  <span id="footInfo"></span></div>
+
+<script>
+let SERVER = 'https://ntfy.sh';
+const $ = id => document.getElementById(id);
+const enc = new TextEncoder(), dec = new TextDecoder();
+let topic, key, all = [], lastId = null, busy = false, autoCount = 0;
+
+function b64uToBytes(s) { s = s.replace(/-/g,'+').replace(/_/g,'/'); while (s.length % 4) s += '='; return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
+function bytesToB64u(b) { let s = ''; b.forEach(x => s += String.fromCharCode(x)); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+
+async function seal(obj) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name:'AES-GCM', iv }, key, enc.encode(JSON.stringify(obj))));
+  const out = new Uint8Array(12 + ct.length); out.set(iv); out.set(ct, 12);
+  return bytesToB64u(out);
+}
+async function unseal(text) {
+  try {
+    const b = b64uToBytes(text.trim());
+    const pt = await crypto.subtle.decrypt({ name:'AES-GCM', iv:b.slice(0,12) }, key, b.slice(12));
+    return JSON.parse(dec.decode(pt));
+  } catch { return null; }
+}
+
+async function poll(since) {
+  const r = await fetch(`${SERVER}/${topic}/json?poll=1&since=${encodeURIComponent(since)}`, { cache:'no-store' });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const lines = (await r.text()).split('\n').filter(Boolean);
+  const got = [];
+  for (const l of lines) {
+    let m; try { m = JSON.parse(l); } catch { continue; }
+    if (m.event !== 'message' || !m.message) continue;
+    lastId = m.id;
+    const o = await unseal(m.message);
+    if (o && o.t === 's') { o._time = m.time; got.push(o); }
+  }
+  all.push(...got);
+  return got;
+}
+
+const latest = () => all.length ? all[all.length - 1] : null;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function check() {
+  if (busy) return; busy = true; $('refresh').disabled = true;
+  setOrb('wait', '⏳'); $('state').textContent = 'Checking…'; $('stateSub').textContent = 'Asking the PC';
+  try {
+    if (!all.length) await poll('12h');
+    const id = bytesToB64u(crypto.getRandomValues(new Uint8Array(6)));
+    const body = await seal({ t:'p', id, ts:Math.floor(Date.now()/1000) });
+    await fetch(`${SERVER}/${topic}`, { method:'POST', body });
+    let reply = null;
+    for (let i = 0; i < 9 && !reply; i++) {
+      await sleep(i === 0 ? 2500 : 2000);
+      const got = await poll(lastId || '1m');
+      reply = got.find(o => o.r === id) || null;
+    }
+    render(reply);
+  } catch (e) {
+    setOrb('sleep', '📶'); $('state').textContent = 'No connection';
+    $('stateSub').textContent = 'Your phone could not reach the server. Check your internet and try again';
+  } finally { busy = false; $('refresh').disabled = false; }
+}
+
+function setOrb(cls, emoji) { const o = $('orb'); o.className = 'orb ' + cls; o.textContent = emoji; }
+
+function ago(sec) {
+  sec = Math.max(0, Math.round(sec));
+  if (sec < 60) return 'just now';
+  if (sec < 3600) return `${Math.floor(sec/60)} min ago`;
+  if (sec < 86400) { const h = Math.floor(sec/3600), m = Math.floor(sec%3600/60); return `${h} h${m ? ` ${m} min` : ''} ago`; }
+  return `${Math.floor(sec/86400)} days ago`;
+}
+function dur(sec) {
+  const d = Math.floor(sec/86400), h = Math.floor(sec%86400/3600), m = Math.floor(sec%3600/60);
+  if (d) return `${d} d ${h} h`;
+  if (h) return `${h} h ${m} min`;
+  return `${m} min`;
+}
+const hhmm = t => new Date(t*1000).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+function rate(b) { if (b == null) return '–'; if (b < 1024) return b + ' B/s'; if (b < 1048576) return (b/1024).toFixed(0) + ' KB/s'; return (b/1048576).toFixed(1) + ' MB/s'; }
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+function render(reply) {
+  const now = Date.now()/1000, last = latest();
+  if (last && last.pc) $('pcName').textContent = last.pc;
+  const age = last ? now - last.ts : Infinity;
+
+  if (reply) {
+    setOrb('on', '🟢'); $('state').textContent = 'PC is on';
+    $('stateSub').textContent = 'Answered just now ✓';
+  } else if (!last) {
+    setOrb('off', '⚫'); $('state').textContent = 'Off';
+    $('stateSub').textContent = 'No sign of the PC in the last 12 hours';
+  } else if (last.st === 'off') {
+    setOrb('off', '🔴'); $('state').textContent = 'PC is off';
+    $('stateSub').textContent = `Shut down ${ago(age)} (${hhmm(last.ts)})`;
+  } else if (last.st === 'sleep') {
+    setOrb('sleep', '😴'); $('state').textContent = 'PC is asleep';
+    $('stateSub').textContent = `Went to sleep ${ago(age)} (${hhmm(last.ts)})`;
+  } else if (last.st === 'quit') {
+    setOrb('sleep', '🤷'); $('state').textContent = 'Pitzki Status was closed';
+    $('stateSub').textContent = `The PC is probably on, but the app was closed ${ago(age)}`;
+  } else if (age < 20*60) {
+    setOrb('sleep', '🟡'); $('state').textContent = 'Probably on';
+    $('stateSub').textContent = `No answer now, but it was on ${ago(age)}. Maybe asleep or offline`;
+  } else {
+    setOrb('off', '🔴'); $('state').textContent = 'Probably off';
+    $('stateSub').textContent = `Last seen ${ago(age)} (${hhmm(last.ts)}) without a shutdown message. Maybe power or internet went out`;
+  }
+
+  const s = reply || (last && last.st === 'on' && last.cpu != null ? last : null);
+  $('details').classList.toggle('hidden', !s);
+  if (s) fill(s, !!reply);
+  history();
+  $('footInfo').textContent = last ? `Last update from the PC: ${hhmm(last.ts)}` : '';
+}
+
+function fill(s, live) {
+  $('cpu').textContent = (s.cpu ?? '–') + '%';
+  $('cpuBar').style.width = (s.cpu || 0) + '%'; $('cpuBar').classList.toggle('hot', s.cpu > 85);
+  if (s.ramT) {
+    const p = Math.round(100 * s.ramU / s.ramT);
+    $('ram').innerHTML = ''; $('ram').append(`${p}%`, ' ', el('small', 'ltr', `${s.ramU}/${s.ramT} GB`));
+    $('ramBar').style.width = p + '%'; $('ramBar').classList.toggle('hot', p > 90);
+  }
+  $('up').textContent = dur(s.up || 0);
+  $('net').innerHTML = ''; $('net').append(el('div', 'ltr', '⬇ ' + rate(s.down)), el('div', 'ltr', '⬆ ' + rate(s.upl)));
+  let who;
+  if (s.lock) who = '🔒 PC is locked';
+  else if (s.idle < 60) who = '👀 Someone is using the PC right now';
+  else who = `💤 Untouched for ${dur(s.idle).replace(/^0 min$/, '1 min')}`;
+  $('who').textContent = who + (live ? '' : ' (' + ago(Date.now()/1000 - s.ts) + ')');
+  $('fg').innerHTML = '';
+  if (s.app) $('fg').append('On screen: ', el('bdi', null, `${s.app}${s.win ? ' — ' + s.win : ''}`));
+  const pz = $('pz'); pz.innerHTML = '';
+  (s.pz || []).forEach(n => pz.append(el('span', 'chip', n)));
+  $('pzCard').classList.toggle('hidden', !(s.pz || []).length);
+  const dk = $('disks'); dk.innerHTML = '';
+  (s.disks || []).forEach(d => {
+    const r = el('div', 'row'); r.append(el('span', null, d.n), el('span', null, `${d.f} GB of ${d.t}`));
+    const bar = el('div', 'bar'); const i = el('i'); const used = d.t ? 100 - 100*d.f/d.t : 0;
+    i.style.width = used + '%'; if (used > 92) i.className = 'hot'; bar.append(i);
+    dk.append(r, bar);
+  });
+  const tp = $('top'); tp.innerHTML = '';
+  (s.top || []).forEach(t => { const r = el('div', 'row'); r.append(el('span', 'ltr', t.n), el('span', null, t.mb >= 1024 ? (t.mb/1024).toFixed(1) + ' GB' : t.mb + ' MB')); tp.append(r); });
+}
+
+function history() {
+  const evs = []; let prev = null;
+  for (const o of all) {
+    if (o.st === 'off') evs.push(['🔴 Shut down', o.ts]);
+    else if (o.st === 'sleep') evs.push(['😴 Went to sleep', o.ts]);
+    else if (o.st === 'quit') evs.push(['🤷 Pitzki Status closed', o.ts]);
+    else if (o.st === 'on' && (!prev || prev.st !== 'on' || o.up < prev.up)) {
+      const bootTs = o.ts - o.up;
+      evs.push([prev && prev.st === 'sleep' ? '🟢 Woke up' : '🟢 Turned on', prev && prev.st === 'sleep' ? o.ts : (now12(bootTs) ? bootTs : o.ts)]);
+    }
+    prev = o;
+  }
+  const h = $('hist'); h.innerHTML = '';
+  if (!evs.length) h.append(el('div', 'small', all.length ? 'On the whole time 💪' : 'No data yet'));
+  evs.slice(-10).reverse().forEach(([t, ts]) => { const r = el('div', 'ev'); r.append(el('span', null, t), el('span', null, hhmm(ts))); h.append(r); });
+}
+const now12 = ts => Date.now()/1000 - ts < 13*3600;
+
+async function init() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  topic = h.get('t'); let k = h.get('k');
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(h.get('s') || '')) SERVER = h.get('s');   // local testing only
+  try {
+    if (topic && k) localStorage.setItem('pzstatus', JSON.stringify({ t:topic, k }));
+    else { const s = JSON.parse(localStorage.getItem('pzstatus') || 'null'); if (s) { topic = s.t; k = s.k; } }
+  } catch {}
+  if (!topic || !k || !/^[a-z0-9-]{8,64}$/.test(topic)) { $('setup').classList.remove('hidden'); return; }
+  try { key = await crypto.subtle.importKey('raw', b64uToBytes(k), 'AES-GCM', false, ['encrypt','decrypt']); }
+  catch { $('setup').classList.remove('hidden'); return; }
+  $('app').classList.remove('hidden');
+  $('refresh').onclick = () => { autoCount = 0; check(); };
+  await check();
+  // keep it fresh while the page is open (limited, so the free daily quota lasts)
+  setInterval(() => { if (!document.hidden && autoCount < 20) { autoCount++; check(); } }, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) { autoCount = 0; check(); } });
+}
+init();
+</script>
+</body>
+</html>
