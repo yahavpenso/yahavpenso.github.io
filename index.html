@@ -581,6 +581,26 @@
   .sd-go { background: #85b7eb; color: #10203a; }
 </style><!--/soon2-css-->
 <style id="demo-note-css">.demo-note{color:#6d6b7d;font-size:12.5px;text-align:center;margin:10px 0 0;font-style:italic}</style>
+<!--soon3-css--><style>
+  .more-soon { margin-top: 40px; background: linear-gradient(180deg, #ffffff07, transparent 40%), var(--panel); border: 1px solid var(--line); border-radius: 30px; padding: 28px; }
+  .ms-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .ms-head h3 { font-size: 24px; letter-spacing: -.02em; }
+  .ms-head span { color: var(--subtle); font-size: 14px; }
+  .ms-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 18px; }
+  .ms-chips button { border: 1px solid var(--line); background: #ffffff08; color: var(--subtle); font: inherit; font-size: 13.5px; padding: 6px 13px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .ms-chips button:hover { color: var(--text); border-color: var(--line2); }
+  .ms-chips button.on { background: var(--accent); color: var(--on-accent); border-color: transparent; font-weight: 600; }
+  .ms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+  .ms-app { display: flex; gap: 12px; align-items: flex-start; padding: 13px 14px; border-radius: 16px; background: #ffffff06; border: 1px solid var(--line); animation: msIn .35s cubic-bezier(.2,.8,.2,1) both; transition: border-color .2s, transform .25s cubic-bezier(.3,1.5,.5,1); }
+  .ms-app:hover { border-color: var(--line2); transform: translateY(-2px); }
+  @keyframes msIn { from { opacity: 0; transform: translateY(6px); } }
+  .ms-app .em { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-size: 19px; background: #ffffff10; flex: none; }
+  .ms-app b { display: block; font-size: 14.5px; }
+  .ms-app p { color: var(--subtle); font-size: 13px; line-height: 1.4; margin-top: 2px; }
+  .ms-app .tag.ready { background: #5dcaa522; color: #5dcaa5; }
+  .ms-app .tag { display: inline-block; margin-top: 6px; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #ffffff0e; color: var(--faint); }
+  @media (max-width: 560px) { .more-soon { padding: 20px; border-radius: 24px; } }
+</style><!--/soon3-css-->
 </head>
 <body>
 
@@ -641,7 +661,7 @@
     <a class="brand" href="#top"><img src="icon.png" alt="">Pitzki</a>
     <a class="link" href="#tour">Tour</a>
     <a class="link" href="#apps">The apps</a>
-    <!--soon-nav--><a class="link" href="#soon">Coming soon</a><!--/soon-nav-->
+    <!--soon-nav--><a class="link" href="#soon">New apps</a><!--/soon-nav-->
     <a class="link" href="#together">Together</a>
     <a class="link" href="#scenes">Scenes</a>
     <a class="link" href="#which">Which one?</a>
@@ -756,20 +776,20 @@
           </div>
         </article>
       </div>
-    </section>
+      </section>
 
     <!--soon--><section id="soon">
       <div class="reveal center">
-        <p class="eyebrow">In the works</p>
-        <h2 class="display">Four more Pitzkis are on the way.</h2>
-        <p class="sub">Being built right now. Here's a first look.</p>
+        <p class="eyebrow">New apps</p>
+        <h2 class="display">4 new Pitzkis, ready to go.</h2>
+        <p class="sub">Built and tested, with their downloads on the way. Below them, everything else that is coming.</p>
       </div>
       <div class="soon">
         <article class="soon-app v reveal">
           <div class="soon-head">
             <img src="icon-volume.png" alt="">
             <div><h3>Pitzki Volume</h3><p>A volume slider for every app</p></div>
-            <span class="soon-chip">Coming soon</span>
+            <span class="soon-chip">Ready · download soon</span>
           </div>
           <p class="soon-text">Turn the game down and the music up, without opening Windows settings. Every app that makes sound gets its own slider, with a little line that moves while it plays. Opens from the tray or with <b>Ctrl+Alt+V</b>.</p>
           <div class="vm-wrap">
@@ -797,7 +817,7 @@
           <div class="soon-head">
             <div class="gif-ic">GIF</div>
             <div><h3>Pitzki GIF</h3><p>Record any part of your screen</p></div>
-            <span class="soon-chip">In development</span>
+            <span class="soon-chip">Ready · download soon</span>
           </div>
           <p class="soon-text">Drag a box over the part of the screen you want, press record, and get a GIF or an MP4 you can share right away. Small files, smooth motion, no watermark.</p>
           <div class="gif-demo" aria-hidden="true">
@@ -815,7 +835,7 @@
           <div class="soon-head">
             <div class="gif-ic cl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3l-6 9M7 12h6l-1 9H6z"/><path d="M8.5 16h3"/></svg></div>
             <div><h3>Pitzki Clean</h3><p>See what fills your disk, free it in one click</p></div>
-            <span class="soon-chip">In development</span>
+            <span class="soon-chip">Ready · download soon</span>
           </div>
           <p class="soon-text">It shows which folders take the most space, and clears the junk Windows leaves behind with one click. Anything that isn't junk, it asks you first.</p>
           <div class="cl" id="cl">
@@ -835,7 +855,7 @@
           <div class="soon-head">
             <div class="gif-ic sd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M12 7v7m-3-3l3 3 3-3"/></svg></div>
             <div><h3>Pitzki Send</h3><p>From your PC to your phone, no cable</p></div>
-            <span class="soon-chip">In development</span>
+            <span class="soon-chip">Ready · download soon</span>
           </div>
           <p class="soon-text">Drop a file in, scan the code with your phone, and it's there. It goes over your own Wi-Fi, so nothing is uploaded anywhere.</p>
           <div class="sd" id="sd">
@@ -847,7 +867,14 @@
         </article>
 <!--/soon2-->
       </div>
-    </section>
+      <!--soon3--><div class="more-soon reveal">
+        <div class="ms-head"><h3>Coming soon</h3><span id="ms-count"></span></div>
+        <div class="ms-chips" id="ms-chips"></div>
+        <div class="ms-grid" id="ms-grid"></div>
+        <p class="demo-note">On the way. Names and features may still change.</p>
+      </div>
+      <script>window.SOON_APPS = [{"n": "Pitzki Free Games", "d": "Free games on Epic, Steam and GOG, with a ping when a new one drops", "e": "🎁", "g": "Games"}, {"n": "Pitzki Sales", "d": "Watches your Steam wishlist and tells you when a game goes on sale", "e": "🏷️", "g": "Games"}, {"n": "Pitzki Roblox Codes", "d": "Working codes for popular Roblox games, in one place", "e": "🧱", "g": "Games"}, {"n": "Pitzki Fortnite Shop", "d": "Today's Fortnite item shop, right on your screen", "e": "🛒", "g": "Games"}, {"n": "Pitzki Achievements", "d": "All your Steam achievements, and which ones are closest", "e": "🏆", "g": "Games"}, {"n": "Pitzki Thumbnail", "d": "YouTube thumbnails from ready-made templates", "e": "🖼️", "g": "Media"}, {"n": "Pitzki Compress", "d": "Shrinks a video under 10 MB so it fits on Discord", "e": "📦", "g": "Media"}, {"n": "Pitzki Cutter", "d": "Trim a video in seconds, without re-encoding", "e": "✂️", "g": "Media"}, {"n": "Pitzki Converter", "d": "Drag in a picture, video or sound, get it in another format", "e": "🔁", "g": "Media"}, {"n": "Pitzki Music", "d": "A small player with the song that's playing and its lyrics", "e": "🎵", "g": "Sound"}, {"n": "Pitzki Mic Check", "d": "Record yourself and hear how you sound", "e": "🎙️", "g": "Sound"}, {"n": "Pitzki Noise", "d": "Removes background noise from your mic", "e": "🔇", "g": "Sound"}, {"n": "Pitzki Countdown", "d": "Count down to the holidays, a test or a big day", "e": "⏳", "g": "School"}, {"n": "Pitzki Summary", "d": "Turns a long text into short points", "e": "📝", "g": "School"}, {"n": "Pitzki Launcher", "d": "Find and open anything in a flash", "e": "🚀", "g": "PC tools"}, {"n": "Pitzki Duplicate", "d": "Finds duplicate files so you can clear them", "e": "👯", "g": "PC tools"}, {"n": "Pitzki Disk Map", "d": "A picture of what takes up your disk", "e": "🗺️", "g": "PC tools"}, {"n": "Pitzki Battery", "d": "Battery level of your laptop, headphones and mouse", "e": "🔋", "g": "PC tools"}, {"n": "Pitzki Wi-Fi", "d": "See who's on your home network", "e": "📶", "g": "PC tools"}, {"n": "Pitzki Night", "d": "A blue-light filter that gets warmer at night", "e": "🌙", "g": "PC tools"}, {"n": "Pitzki Color Picker", "d": "Pick a color from anywhere on the screen", "e": "🎨", "g": "PC tools"}, {"n": "Pitzki Backup", "d": "Backs up your important folders by itself", "e": "💾", "g": "PC tools"}, {"n": "Pitzki Remote", "d": "Control your PC from your phone: music, volume, power", "e": "📱", "g": "Phone"}, {"n": "Pitzki Notify", "d": "Your phone notifications, on your PC", "e": "🔔", "g": "Phone"}, {"n": "Pitzki Status", "d": "Check from your phone if your PC is on and how it is doing", "e": "📡", "g": "Phone"}, {"n": "Pitzki Collect", "d": "Rare Pitzki cards that unlock as you use your PC", "e": "🃏", "g": "Fun"}, {"n": "Pitzki Store", "d": "Every Pitzki app in one place, installed and updated for you", "e": "🏬", "g": "Friends"}, {"n": "Pitzki Profile", "d": "One gamer profile with your stats from every game", "e": "🪪", "g": "Friends"}];</script><!--/soon3-->
+      </section>
 
     <!--/soon-->
     <!-- bento -->
@@ -989,7 +1016,7 @@
           <a href="https://yahavpenso.github.io/Piztki/">Pitzki notch</a>
           <a href="https://yahavpenso.github.io/PitzkiWidgets/">Pitzki Widgets</a>
           <a href="#which">Which one?</a>
-          <!--soon-foot--><a href="#soon">Pitzki Volume <span style="color:var(--faint)">· soon</span></a><a href="#soon">Pitzki GIF <span style="color:var(--faint)">· soon</span></a><!--soon2-foot--><a href="#soon">Pitzki Clean <span style="color:var(--faint)">· soon</span></a><a href="#soon">Pitzki Send <span style="color:var(--faint)">· soon</span></a><!--/soon2-foot--><!--/soon-foot-->
+          <!--soon-foot--><a href="#soon">Pitzki Volume <span style="color:var(--faint)">· new</span></a><a href="#soon">Pitzki GIF <span style="color:var(--faint)">· new</span></a><!--soon2-foot--><a href="#soon">Pitzki Clean <span style="color:var(--faint)">· new</span></a><a href="#soon">Pitzki Send <span style="color:var(--faint)">· new</span></a><!--/soon2-foot--><!--/soon-foot-->
         </div>
         <div>
           <h4>Download</h4>
@@ -1323,5 +1350,22 @@
     };
   })();
 </script><!--/soon2-js-->
+<!--soon3-js--><script>
+  (() => {
+    const apps = window.SOON_APPS || [], grid = document.getElementById('ms-grid'), chips = document.getElementById('ms-chips');
+    if (!grid) return;
+    const groups = ['All', ...new Set(apps.map(a => a.g))];
+    let pick = 'All';
+    const draw = () => {
+      const list = apps.filter(a => pick === 'All' || a.g === pick);
+      grid.innerHTML = list.map((a, i) => `<div class="ms-app" style="animation-delay:${Math.min(i, 12) * 25}ms"><span class="em">${a.e}</span><div><b>${a.n}</b><p>${a.d}</p><span class="tag">${a.g} · soon</span></div></div>`).join('');
+      chips.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.g === pick));
+    };
+    chips.innerHTML = groups.map(g => `<button data-g="${g}">${g}${g === 'All' ? ` (${apps.length})` : ''}</button>`).join('');
+    chips.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { pick = b.dataset.g; draw(); } });
+    document.getElementById('ms-count').textContent = `${apps.length} more apps on the way`;
+    draw();
+  })();
+</script><!--/soon3-js-->
 </body>
 </html>
