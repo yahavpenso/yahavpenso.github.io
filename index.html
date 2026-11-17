@@ -594,13 +594,15 @@
   .ms-app { display: flex; gap: 12px; align-items: flex-start; padding: 13px 14px; border-radius: 16px; background: #ffffff06; border: 1px solid var(--line); animation: msIn .35s cubic-bezier(.2,.8,.2,1) both; transition: border-color .2s, transform .25s cubic-bezier(.3,1.5,.5,1); }
   .ms-app:hover { border-color: var(--line2); transform: translateY(-2px); }
   @keyframes msIn { from { opacity: 0; transform: translateY(6px); } }
-  .ms-app .em { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-size: 19px; background: #ffffff10; flex: none; }
+  .ms-app .em { width: 46px; height: 46px; flex: none; }
+  .ms-app .em img { width: 46px; height: 46px; border-radius: 12px; display: block; box-shadow: 0 4px 12px #0006; }
   .ms-app b { display: block; font-size: 14.5px; }
   .ms-app p { color: var(--subtle); font-size: 13px; line-height: 1.4; margin-top: 2px; }
   .ms-app .tag.ready { background: #5dcaa522; color: #5dcaa5; }
   .ms-app .tag { display: inline-block; margin-top: 6px; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #ffffff0e; color: var(--faint); }
   @media (max-width: 560px) { .more-soon { padding: 20px; border-radius: 24px; } }
 </style><!--/soon3-css-->
+<style id="real-ic-css">.soon-head .real-ic { width: 56px; height: 56px; border-radius: 16px; flex: none; box-shadow: 0 8px 20px -6px #000a; }</style>
 </head>
 <body>
 
@@ -787,7 +789,7 @@
       <div class="soon">
         <article class="soon-app v reveal">
           <div class="soon-head">
-            <img src="icon-volume.png" alt="">
+            <img class="real-ic" src="icons/volume.png" alt="">
             <div><h3>Pitzki Volume</h3><p>A volume slider for every app</p></div>
             <span class="soon-chip">Ready · download soon</span>
           </div>
@@ -815,7 +817,7 @@
 
         <article class="soon-app g reveal">
           <div class="soon-head">
-            <div class="gif-ic">GIF</div>
+            <img class="real-ic" src="icons/gif.png" alt="">
             <div><h3>Pitzki GIF</h3><p>Record any part of your screen</p></div>
             <span class="soon-chip">Ready · download soon</span>
           </div>
@@ -833,7 +835,7 @@
 <!--soon2-->
         <article class="soon-app c reveal">
           <div class="soon-head">
-            <div class="gif-ic cl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3l-6 9M7 12h6l-1 9H6z"/><path d="M8.5 16h3"/></svg></div>
+            <img class="real-ic" src="icons/clean.png" alt="">
             <div><h3>Pitzki Clean</h3><p>See what fills your disk, free it in one click</p></div>
             <span class="soon-chip">Ready · download soon</span>
           </div>
@@ -853,7 +855,7 @@
 
         <article class="soon-app s reveal">
           <div class="soon-head">
-            <div class="gif-ic sd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M12 7v7m-3-3l3 3 3-3"/></svg></div>
+            <img class="real-ic" src="icons/send.png" alt="">
             <div><h3>Pitzki Send</h3><p>From your PC to your phone, no cable</p></div>
             <span class="soon-chip">Ready · download soon</span>
           </div>
@@ -873,7 +875,7 @@
         <div class="ms-grid" id="ms-grid"></div>
         <p class="demo-note">On the way. Names and features may still change.</p>
       </div>
-      <script>window.SOON_APPS = [{"n": "Pitzki Free Games", "d": "Free games on Epic, Steam and GOG, with a ping when a new one drops", "e": "🎁", "g": "Games"}, {"n": "Pitzki Sales", "d": "Watches your Steam wishlist and tells you when a game goes on sale", "e": "🏷️", "g": "Games"}, {"n": "Pitzki Roblox Codes", "d": "Working codes for popular Roblox games, in one place", "e": "🧱", "g": "Games"}, {"n": "Pitzki Fortnite Shop", "d": "Today's Fortnite item shop, right on your screen", "e": "🛒", "g": "Games"}, {"n": "Pitzki Achievements", "d": "All your Steam achievements, and which ones are closest", "e": "🏆", "g": "Games"}, {"n": "Pitzki Thumbnail", "d": "YouTube thumbnails from ready-made templates", "e": "🖼️", "g": "Media"}, {"n": "Pitzki Compress", "d": "Shrinks a video under 10 MB so it fits on Discord", "e": "📦", "g": "Media"}, {"n": "Pitzki Cutter", "d": "Trim a video in seconds, without re-encoding", "e": "✂️", "g": "Media"}, {"n": "Pitzki Converter", "d": "Drag in a picture, video or sound, get it in another format", "e": "🔁", "g": "Media"}, {"n": "Pitzki Music", "d": "A small player with the song that's playing and its lyrics", "e": "🎵", "g": "Sound"}, {"n": "Pitzki Mic Check", "d": "Record yourself and hear how you sound", "e": "🎙️", "g": "Sound"}, {"n": "Pitzki Noise", "d": "Removes background noise from your mic", "e": "🔇", "g": "Sound"}, {"n": "Pitzki Countdown", "d": "Count down to the holidays, a test or a big day", "e": "⏳", "g": "School"}, {"n": "Pitzki Summary", "d": "Turns a long text into short points", "e": "📝", "g": "School"}, {"n": "Pitzki Launcher", "d": "Find and open anything in a flash", "e": "🚀", "g": "PC tools"}, {"n": "Pitzki Duplicate", "d": "Finds duplicate files so you can clear them", "e": "👯", "g": "PC tools"}, {"n": "Pitzki Disk Map", "d": "A picture of what takes up your disk", "e": "🗺️", "g": "PC tools"}, {"n": "Pitzki Battery", "d": "Battery level of your laptop, headphones and mouse", "e": "🔋", "g": "PC tools"}, {"n": "Pitzki Wi-Fi", "d": "See who's on your home network", "e": "📶", "g": "PC tools"}, {"n": "Pitzki Night", "d": "A blue-light filter that gets warmer at night", "e": "🌙", "g": "PC tools"}, {"n": "Pitzki Color Picker", "d": "Pick a color from anywhere on the screen", "e": "🎨", "g": "PC tools"}, {"n": "Pitzki Backup", "d": "Backs up your important folders by itself", "e": "💾", "g": "PC tools"}, {"n": "Pitzki Remote", "d": "Control your PC from your phone: music, volume, power", "e": "📱", "g": "Phone"}, {"n": "Pitzki Notify", "d": "Your phone notifications, on your PC", "e": "🔔", "g": "Phone"}, {"n": "Pitzki Status", "d": "Check from your phone if your PC is on and how it is doing", "e": "📡", "g": "Phone"}, {"n": "Pitzki Collect", "d": "Rare Pitzki cards that unlock as you use your PC", "e": "🃏", "g": "Fun"}, {"n": "Pitzki Store", "d": "Every Pitzki app in one place, installed and updated for you", "e": "🏬", "g": "Friends"}, {"n": "Pitzki Profile", "d": "One gamer profile with your stats from every game", "e": "🪪", "g": "Friends"}];</script><!--/soon3-->
+      <script>window.SOON_APPS = [{"n": "Pitzki Free Games", "d": "Free games on Epic, Steam and GOG, with a ping when a new one drops", "e": "🎁", "g": "Games", "i": "icons/free-games.png"}, {"n": "Pitzki Sales", "d": "Watches your Steam wishlist and tells you when a game goes on sale", "e": "🏷️", "g": "Games", "i": "icons/sales.png"}, {"n": "Pitzki Roblox Codes", "d": "Working codes for popular Roblox games, in one place", "e": "🧱", "g": "Games", "i": "icons/roblox-codes.png"}, {"n": "Pitzki Fortnite Shop", "d": "Today's Fortnite item shop, right on your screen", "e": "🛒", "g": "Games", "i": "icons/fortnite-shop.png"}, {"n": "Pitzki Achievements", "d": "All your Steam achievements, and which ones are closest", "e": "🏆", "g": "Games", "i": "icons/achievements.png"}, {"n": "Pitzki Thumbnail", "d": "YouTube thumbnails from ready-made templates", "e": "🖼️", "g": "Media", "i": "icons/thumbnail.png"}, {"n": "Pitzki Compress", "d": "Shrinks a video under 10 MB so it fits on Discord", "e": "📦", "g": "Media", "i": "icons/compress.png"}, {"n": "Pitzki Cutter", "d": "Trim a video in seconds, without re-encoding", "e": "✂️", "g": "Media", "i": "icons/cutter.png"}, {"n": "Pitzki Converter", "d": "Drag in a picture, video or sound, get it in another format", "e": "🔁", "g": "Media", "i": "icons/converter.png"}, {"n": "Pitzki Music", "d": "A small player with the song that's playing and its lyrics", "e": "🎵", "g": "Sound", "i": "icons/music.png"}, {"n": "Pitzki Mic Check", "d": "Record yourself and hear how you sound", "e": "🎙️", "g": "Sound", "i": "icons/mic-check.png"}, {"n": "Pitzki Noise", "d": "Removes background noise from your mic", "e": "🔇", "g": "Sound", "i": "icons/noise.png"}, {"n": "Pitzki Countdown", "d": "Count down to the holidays, a test or a big day", "e": "⏳", "g": "School", "i": "icons/countdown.png"}, {"n": "Pitzki Summary", "d": "Turns a long text into short points", "e": "📝", "g": "School", "i": "icons/summary.png"}, {"n": "Pitzki Launcher", "d": "Find and open anything in a flash", "e": "🚀", "g": "PC tools", "i": "icons/launcher.png"}, {"n": "Pitzki Duplicate", "d": "Finds duplicate files so you can clear them", "e": "👯", "g": "PC tools", "i": "icons/duplicate.png"}, {"n": "Pitzki Disk Map", "d": "A picture of what takes up your disk", "e": "🗺️", "g": "PC tools", "i": "icons/disk-map.png"}, {"n": "Pitzki Battery", "d": "Battery level of your laptop, headphones and mouse", "e": "🔋", "g": "PC tools", "i": "icons/battery.png"}, {"n": "Pitzki Wi-Fi", "d": "See who's on your home network", "e": "📶", "g": "PC tools", "i": "icons/wi-fi.png"}, {"n": "Pitzki Night", "d": "A blue-light filter that gets warmer at night", "e": "🌙", "g": "PC tools", "i": "icons/night.png"}, {"n": "Pitzki Color Picker", "d": "Pick a color from anywhere on the screen", "e": "🎨", "g": "PC tools", "i": "icons/color-picker.png"}, {"n": "Pitzki Backup", "d": "Backs up your important folders by itself", "e": "💾", "g": "PC tools", "i": "icons/backup.png"}, {"n": "Pitzki Remote", "d": "Control your PC from your phone: music, volume, power", "e": "📱", "g": "Phone", "i": "icons/remote.png"}, {"n": "Pitzki Notify", "d": "Your phone notifications, on your PC", "e": "🔔", "g": "Phone", "i": "icons/notify.png"}, {"n": "Pitzki Status", "d": "Check from your phone if your PC is on and how it is doing", "e": "📡", "g": "Phone", "i": "icons/status.png"}, {"n": "Pitzki Collect", "d": "Rare Pitzki cards that unlock as you use your PC", "e": "🃏", "g": "Fun", "i": "icons/collect.png"}, {"n": "Pitzki Store", "d": "Every Pitzki app in one place, installed and updated for you", "e": "🏬", "g": "Friends", "i": "icons/store.png"}, {"n": "Pitzki Profile", "d": "One gamer profile with your stats from every game", "e": "🪪", "g": "Friends", "i": "icons/profile.png"}];</script><!--/soon3-->
       </section>
 
     <!--/soon-->
@@ -1358,7 +1360,7 @@
     let pick = 'All';
     const draw = () => {
       const list = apps.filter(a => pick === 'All' || a.g === pick);
-      grid.innerHTML = list.map((a, i) => `<div class="ms-app" style="animation-delay:${Math.min(i, 12) * 25}ms"><span class="em">${a.e}</span><div><b>${a.n}</b><p>${a.d}</p><span class="tag">${a.g} · soon</span></div></div>`).join('');
+      grid.innerHTML = list.map((a, i) => `<div class="ms-app" style="animation-delay:${Math.min(i, 12) * 25}ms"><span class="em"><img src="${a.i}" alt="" loading="lazy"></span><div><b>${a.n}</b><p>${a.d}</p><span class="tag">${a.g} · soon</span></div></div>`).join('');
       chips.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.g === pick));
     };
     chips.innerHTML = groups.map(g => `<button data-g="${g}">${g}${g === 'All' ? ` (${apps.length})` : ''}</button>`).join('');
