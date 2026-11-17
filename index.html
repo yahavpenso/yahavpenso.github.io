@@ -248,7 +248,8 @@
   @media (max-width: 860px) { .story .stage .real-screen { max-width: min(100%, calc(46vh * 960 / 554)); margin: 0 auto; } }
 
   /* ---------- the two apps ---------- */
-  .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 50px; }
+  .apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
+  @media (max-width: 1100px) { .apps { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 860px) { .apps { grid-template-columns: 1fr; } }
   .app { background: linear-gradient(180deg, #ffffff07, transparent 40%), var(--panel); border: 1px solid var(--line); border-radius: 30px; padding: 30px; display: flex; flex-direction: column; position: relative; overflow: hidden;
          transition: border-color .4s; }
@@ -257,6 +258,8 @@
   .app:hover::before { opacity: .28; }
   .app.n { --c: var(--notch); --accent: var(--notch); }
   .app.c { --c: var(--cards); --accent: var(--cards); }
+  .app.l { --c: #85b7eb; --accent: #85b7eb; }
+  .app.l .shot video { object-position: center top; background: linear-gradient(170deg, #2a2560, #5a3a7c); }
   .app .head { display: flex; align-items: center; gap: 16px; }
   .app .head img { width: 60px; height: 60px; border-radius: 16px; box-shadow: 0 10px 30px -10px var(--c); }
   .app .head h3 { font-size: 28px; letter-spacing: -.02em; }
@@ -603,19 +606,6 @@
   .ms-app .tag { display: inline-block; margin-top: 6px; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #ffffff0e; color: var(--faint); }
   @media (max-width: 560px) { .more-soon { padding: 20px; border-radius: 24px; } }
 </style><!--/soon3-css-->
-<!--ready-css--><style>
-  .rd { margin-top: 22px; background: linear-gradient(180deg, #ffffff07, transparent 40%), var(--panel); border: 1px solid var(--line); border-radius: 30px; padding: 24px 28px; }
-  .rd h3 { font-size: 22px; letter-spacing: -.02em; margin-bottom: 12px; }
-  .rd-app { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); }
-  .rd-app:first-of-type { border-top: 0; }
-  .rd-app img { width: 60px; height: 60px; border-radius: 16px; flex: none; box-shadow: 0 8px 20px -6px #000a; }
-  .rd-txt { flex: 1; min-width: 0; }
-  .rd-txt b { font-size: 17px; }
-  .rd-txt p { color: var(--subtle); font-size: 14.5px; margin-top: 2px; }
-  .rd-acts { display: flex; gap: 8px; flex: none; }
-  .ghost.small { padding: 8px 16px; font-size: 14px; }
-  @media (max-width: 620px) { .rd { padding: 20px; } .rd-app { flex-wrap: wrap; } .rd-acts { width: 100%; } }
-</style><!--/ready-css-->
 </head>
 <body>
 
@@ -744,7 +734,7 @@
     <section id="apps">
       <div class="reveal center">
         <p class="eyebrow">The apps</p>
-        <h2 class="display">Pick one. Or both.</h2>
+        <h2 class="display">Pick one. Or all of them.</h2>
         <p class="sub">Each works on its own, and each has its own page with every detail.</p>
       </div>
       <div class="apps">
@@ -791,13 +781,29 @@
             <a class="ghost" href="https://yahavpenso.github.io/PitzkiWidgets/">Learn more <span class="arr">→</span></a>
           </div>
         </article>
+        <article class="app l reveal">
+          <div class="head"><img src="icons/launcher.png" alt=""><div><h3>Pitzki Launcher</h3><p>Find and open anything with Alt+Space</p></div></div>
+          <div class="shot" data-slides>
+            <video class="clip on" src="launcher/media/hero.mp4" data-gif="launcher/media/hero.gif" muted loop playsinline autoplay preload="auto" aria-label="Searching with Pitzki Launcher"></video>
+            <video class="clip" src="launcher/media/apps.mp4" data-gif="launcher/media/apps.gif" muted loop playsinline autoplay preload="auto" aria-label="Finding apps"></video>
+            <video class="clip" src="launcher/media/files.mp4" data-gif="launcher/media/files.gif" muted loop playsinline autoplay preload="auto" aria-label="Finding files"></video>
+            <video class="clip" src="launcher/media/settings.mp4" data-gif="launcher/media/settings.gif" muted loop playsinline autoplay preload="auto" aria-label="Opening Windows settings"></video>
+            <video class="clip" src="launcher/media/calc.mp4" data-gif="launcher/media/calc.gif" muted loop playsinline autoplay preload="auto" aria-label="Doing math"></video>
+          </div>
+          <div class="dots"></div>
+          <ul>
+            <li><svg><use href="#check"/></svg><span><b>Apps, files and folders</b>, found in a few letters</span></li>
+            <li><svg><use href="#check"/></svg><span><b>Windows settings</b> by name, like wifi or bluetooth</span></li>
+            <li><svg><use href="#check"/></svg><span><b>Quick actions</b>: lock, sleep, restart, screenshot</span></li>
+            <li><svg><use href="#check"/></svg><span><b>Math and web search</b> right in the box</span></li>
+          </ul>
+          <div class="acts">
+            <a class="button" href="https://github.com/yahavpenso/PitzkiLauncher/releases/latest"><svg><use href="#down"/></svg>Download</a>
+            <a class="ghost" href="https://yahavpenso.github.io/launcher/">Learn more <span class="arr">→</span></a>
+          </div>
+        </article>
       </div>
-      <!--ready--><div class="rd reveal">
-        <h3>More Pitzki apps</h3>
-          <div class="rd-app"><img src="icons/launcher.png" alt=""><div class="rd-txt"><b>Pitzki Launcher</b><p>Find and open anything in a flash: apps, files and folders, from one quick search box.</p></div>
-            <div class="rd-acts"><a class="button small" href="https://github.com/yahavpenso/PitzkiLauncher/releases/latest"><svg><use href="#down"/></svg>Download</a><a class="ghost small" href="https://yahavpenso.github.io/launcher/">Learn more</a></div></div>
-      </div><!--/ready-->
-    </section>
+      </section>
 
     <!--soon--><section id="soon">
       <div class="reveal center">
