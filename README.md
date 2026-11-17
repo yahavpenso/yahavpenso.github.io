@@ -19,6 +19,7 @@ Free, no account, no ads.
 |---|---|---|---|
 | <img src="icon.png" width="44"> | **Pitzki** | A friendly little notch at the top of your screen: music with live lyrics, timers, tasks, calendar and game tabs. | [Website](https://yahavpenso.github.io/Piztki/) · [Download](https://github.com/yahavpenso/Piztki/releases) |
 | <img src="icon-widgets.png" width="44"> | **Pitzki Widgets** | 43 little live cards on your desktop: clock, weather, tasks, stocks, music, Steam and more, with Pitzki living in them. | [Website](https://yahavpenso.github.io/PitzkiWidgets/) · [Download](https://github.com/yahavpenso/PitzkiWidgets/releases/latest) |
+| <img src="icons/launcher.png" width="44"> | **Pitzki Launcher** | Find and open anything in a flash: apps, files and folders, from one quick search box. | [Website](https://yahavpenso.github.io/launcher/) · [Download](https://github.com/yahavpenso/PitzkiLauncher/releases/latest) |
 
 ## Ready, download on the way
 
@@ -29,7 +30,7 @@ Free, no account, no ads.
 | <img src="icons/clean.png" width="40"> | **Pitzki Clean** | See what fills your disk and clear the junk in one click. |
 | <img src="icons/send.png" width="40"> | **Pitzki Send** | Send a file from your PC to your phone by scanning a code, over your own Wi-Fi. |
 
-## Coming soon (28 more)
+## Coming soon (27 more)
 
 | | App | What it will do |
 |---|---|---|
@@ -47,7 +48,6 @@ Free, no account, no ads.
 | <img src="icons/noise.png" width="36"> | **Pitzki Noise** | Removes background noise from your mic |
 | <img src="icons/countdown.png" width="36"> | **Pitzki Countdown** | Count down to the holidays, a test or a big day |
 | <img src="icons/summary.png" width="36"> | **Pitzki Summary** | Turns a long text into short points |
-| <img src="icons/launcher.png" width="36"> | **Pitzki Launcher** | Find and open anything in a flash |
 | <img src="icons/duplicate.png" width="36"> | **Pitzki Duplicate** | Finds duplicate files so you can clear them |
 | <img src="icons/disk-map.png" width="36"> | **Pitzki Disk Map** | A picture of what takes up your disk |
 | <img src="icons/battery.png" width="36"> | **Pitzki Battery** | Battery level of your laptop, headphones and mouse |
